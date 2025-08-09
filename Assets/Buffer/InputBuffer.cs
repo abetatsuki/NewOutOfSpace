@@ -1,33 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 [RequireComponent(typeof(PlayerInput))]
-[DefaultExecutionOrder(-1000)]
-
-public class InputBuffer : MonoBehaviour
+public class PlayerInputNotifier : MonoBehaviour
 {
-    private const string MOVE_ACTION = "Move";
-    private const string SPRINT_ACTION = "Sprint";
-    private const string CARRY_ACTION = "Carry";
-   
+    public event Action<Vector2> OnMove;
+    public event Action OnSprintStarted;
+    public event Action OnSprintCanceled;
 
-    public InputAction MoveAction => _moveAction;
-    public InputAction SprintAction => _sprintAction;
-    public InputAction CarryAction => _carryAction;
+    private InputAction moveAction;
+    private InputAction sprintAction;
 
-
-    private InputAction _moveAction;
-    private InputAction _sprintAction;
-    private InputAction _carryAction;
-
-
-    private void Awake()
-    {
-        if (TryGetComponent<PlayerInput>(out var playerInput))
-        {
-            _moveAction = playerInput.actions[MOVE_ACTION];
-            _sprintAction = playerInput.actions[SPRINT_ACTION];
-            _carryAction = playerInput.actions[CARRY_ACTION];
-
-        }
-    }
 }
