@@ -22,16 +22,33 @@ public class PlayerMoveHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        MovePlayer();
+    }
+    private void MovePlayer()
+    {
         Vector2 input = statusBuffer.MoveInput;
-        Vector3 moveDir = new Vector3(input.x, 0f, input.y);
+        Vector3 moveDir = new Vector3(input.x, 0, input.y);
 
-        float speed = baseSpeed;
-        if (statusBuffer.CurrentStatus == PlayerStatus.Sprinting)
-        {
-            speed += sprintBonusSpeed;
-        }
+        float speed = GetSpeedByStatus();
 
         Vector3 velocity = moveDir * speed;
         rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+    }
+    private float GetSpeedByStatus()
+    {
+        switch (statusBuffer.CurrentStatus)
+        {
+            case PlayerStatus.None:
+                return 0f;
+
+            case PlayerStatus.Walking:
+                return baseSpeed;
+
+            case PlayerStatus.Sprinting:
+                return baseSpeed + sprintBonusSpeed;
+
+            default:
+                return baseSpeed;
+        }
     }
 }
