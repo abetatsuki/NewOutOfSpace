@@ -3,31 +3,34 @@ using UnityEngine;
 public class PlayerMoveHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInputNotifier inputNotifier;
+    [SerializeField] private PlayerStatusBuffer statusBuffer;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float moveSpeed = 5f;
-  
 
-    private Vector3 moveDirection;
+    [SerializeField] private float baseSpeed = 5f;
+    [SerializeField] private float sprintBonusSpeed = 3f;
+
     private void OnEnable()
     {
-        inputNotifier.OnMove += HandleMove;
+        inputNotifier.OnMove += statusBuffer.SetMoveInput;
     }
 
     private void OnDisable()
     {
-        inputNotifier.OnMove -= HandleMove;
+        inputNotifier.OnMove -= statusBuffer.SetMoveInput;
     }
-
-    private void HandleMove(Vector2 input)
-    {
-         moveDirection = new Vector3(input.x, 0f, input.y);  // YはZにマッピング
-                                                                    // ここでmoveDirectionを使う（XZ平面移動）
-    }
-
 
     private void FixedUpdate()
     {
-        Vector3 velocity = moveDirection * moveSpeed;
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z); // Y軸の速度は維持 rbのベロシティは１秒間にどれだけうごくかのプロパティ
+        Vector2 input = statusBuffer.MoveInput;
+        Vector3 moveDir = new Vector3(input.x, 0f, input.y);
+
+        float speed = baseSpeed;
+        if (statusBuffer.CurrentStatus == PlayerStatus.Sprinting)
+        {
+            speed += sprintBonusSpeed;
+        }
+
+        Vector3 velocity = moveDir * speed;
+        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
     }
 }

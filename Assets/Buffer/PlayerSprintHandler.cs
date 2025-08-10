@@ -1,14 +1,12 @@
 using UnityEngine;
+using System;
 
 public class PlayerSprintHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInputNotifier inputNotifier;
+    [SerializeField] private PlayerStatusBuffer statusBuffer;
 
-    // 外部からスプリント状態を参照できるようにプロパティ化
-    public bool IsSprinting { get; private set; }
-
-    // スプリント状態が変わったことを通知するイベント（必要なら）
-    public event System.Action<bool> OnSprintChanged;
+    public event Action<PlayerStatus> OnSprintStatusChanged;
 
     private void OnEnable()
     {
@@ -22,11 +20,11 @@ public class PlayerSprintHandler : MonoBehaviour
 
     private void HandleSprint(bool isSprinting)
     {
-        if (IsSprinting == isSprinting) return; // 変化がなければ処理しない
+        var newStatus = isSprinting ? PlayerStatus.Sprinting : PlayerStatus.None;
 
-        IsSprinting = isSprinting;
-        OnSprintChanged?.Invoke(isSprinting);
+        if (statusBuffer.CurrentStatus == newStatus) return;
 
-        
+        statusBuffer.SetSprintStatus(newStatus);
+        OnSprintStatusChanged?.Invoke(newStatus);
     }
 }
