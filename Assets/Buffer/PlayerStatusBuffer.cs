@@ -17,7 +17,7 @@ public class PlayerStatusBuffer : MonoBehaviour
     public event Action<PlayerStatus> OnStatusChanged;
 
     public PlayerStatus CurrentStatus { get; private set; } = PlayerStatus.None;
-    public CameraViewMode CurrentCameraView { get; private set; } = CameraViewMode.TopView;
+   
 
     private Vector2 moveInput = Vector2.zero;
     public Vector2 MoveInput => moveInput;
@@ -28,11 +28,7 @@ public class PlayerStatusBuffer : MonoBehaviour
         UpdateStatusFromInput();
     }
 
-    public void SetCameraView(CameraViewMode viewMode)
-    {
-        if (CurrentCameraView != viewMode)
-            CurrentCameraView = viewMode;
-    }
+  
 
     // 状態変更は必ずこのメソッドを通す
     public void SetStatus(PlayerStatus newStatus)
