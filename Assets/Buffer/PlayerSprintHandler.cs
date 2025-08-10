@@ -4,6 +4,12 @@ public class PlayerSprintHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInputNotifier inputNotifier;
 
+    // 外部からスプリント状態を参照できるようにプロパティ化
+    public bool IsSprinting { get; private set; }
+
+    // スプリント状態が変わったことを通知するイベント（必要なら）
+    public event System.Action<bool> OnSprintChanged;
+
     private void OnEnable()
     {
         inputNotifier.OnSprint += HandleSprint;
@@ -16,7 +22,11 @@ public class PlayerSprintHandler : MonoBehaviour
 
     private void HandleSprint(bool isSprinting)
     {
-        Debug.Log("スプリント処理: " + isSprinting);
-        // スプリント時の速度変更など
+        if (IsSprinting == isSprinting) return; // 変化がなければ処理しない
+
+        IsSprinting = isSprinting;
+        OnSprintChanged?.Invoke(isSprinting);
+
+        
     }
 }

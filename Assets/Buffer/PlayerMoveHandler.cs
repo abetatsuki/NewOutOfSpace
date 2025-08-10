@@ -5,6 +5,7 @@ public class PlayerMoveHandler : MonoBehaviour
     [SerializeField] private PlayerInputNotifier inputNotifier;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float moveSpeed = 5f;
+  
 
     private Vector3 moveDirection;
     private void OnEnable()
@@ -27,6 +28,6 @@ public class PlayerMoveHandler : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 velocity = moveDirection * moveSpeed;
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z); // Y軸の速度は維持
+        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z); // Y軸の速度は維持 rbのベロシティは１秒間にどれだけうごくかのプロパティ
     }
 }
