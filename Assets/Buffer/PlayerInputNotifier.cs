@@ -31,7 +31,7 @@ public class PlayerInputNotifier : MonoBehaviour
     private void OnEnable()
     {
         // MOVEアクション
-        moveAction.performed += ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
+        moveAction.performed += ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>()); //ラムダ式は引数=>関数のこと　+=ctxは計算結果を返している
         moveAction.canceled += ctx => OnMove?.Invoke(Vector2.zero);
 
         // SPRINTアクション
