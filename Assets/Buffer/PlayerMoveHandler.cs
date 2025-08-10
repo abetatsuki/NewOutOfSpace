@@ -1,3 +1,4 @@
+// 具体的な移動処理を担当。バッファーの状態を参照する
 using UnityEngine;
 
 public class PlayerMoveHandler : MonoBehaviour
