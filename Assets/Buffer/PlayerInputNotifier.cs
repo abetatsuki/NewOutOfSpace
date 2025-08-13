@@ -8,7 +8,7 @@ public class PlayerInputNotifier : MonoBehaviour
 
     public event Action<Vector2> OnMove;
     public event Action<bool> OnSprint;
-    public event Action OnCarry;
+    public event Action<bool> OnCarry;
     public event Action OnCamera;
    
 
@@ -39,7 +39,8 @@ public class PlayerInputNotifier : MonoBehaviour
         sprintAction.performed += ctx => OnSprint?.Invoke(true);
         sprintAction.canceled += ctx => OnSprint?.Invoke(false);
 
-        carryAction.performed += ctx => OnCarry?.Invoke();
+        carryAction.performed += ctx => OnCarry?.Invoke(true);
+        cameraAction.canceled += ctx => OnCarry?.Invoke(false);
         cameraAction.performed += ctx => OnCamera?.Invoke();
     }
 
@@ -51,7 +52,8 @@ public class PlayerInputNotifier : MonoBehaviour
         sprintAction.performed -= ctx => OnSprint?.Invoke(true);
         sprintAction.canceled -= ctx => OnSprint?.Invoke(false);
 
-        carryAction.performed -= ctx => OnCarry?.Invoke();
+        carryAction.performed += ctx => OnCarry?.Invoke(true);
+        cameraAction.canceled += ctx => OnCarry?.Invoke(false);
         cameraAction.performed -= ctx => OnCamera?.Invoke();
     }
 }

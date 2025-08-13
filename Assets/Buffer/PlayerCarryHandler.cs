@@ -14,7 +14,7 @@ public class PlayerCarryHandler : MonoBehaviour
         inputNotifier.OnCarry -= HandleCarry;
     }
 
-    private void HandleCarry()
+    private void HandleCarry(bool IsCarry )
     {
         Debug.Log("キャリー処理");
         // キャリーアクションの実装
