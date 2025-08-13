@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEditor;
 
 public enum PlayerStatus
 {
@@ -20,13 +21,22 @@ public class PlayerStatusBuffer : MonoBehaviour
     public PlayerStatus CurrentStatus { get; private set; } = PlayerStatus.None;
    
 
-    private Vector2 moveInput = Vector2.zero;
-    public Vector2 MoveInput => moveInput;
+    private Vector2 _moveInput = Vector2.zero;
+    public Vector2 MoveInput => _moveInput;
+
+    private bool _IsCarry = false;
+
+    public bool IsCarry => _IsCarry;
 
     public void SetMoveInput(Vector2 input)
     {
-        moveInput = input;
+        _moveInput = input;
         UpdateStatusFromInput();
+    }
+    public void SetCarryInout(bool isCarry)
+    {
+        _IsCarry = isCarry;
+        Carry();
     }
 
   
@@ -50,7 +60,7 @@ public class PlayerStatusBuffer : MonoBehaviour
     private void UpdateStatusFromInput()
     {
         // 入力による自動状態遷移例（必要なら）
-        if (moveInput == Vector2.zero)
+        if (_moveInput == Vector2.zero)
         {
             SetStatus(PlayerStatus.None);
         }
@@ -59,6 +69,18 @@ public class PlayerStatusBuffer : MonoBehaviour
             SetStatus(PlayerStatus.Walking);
         }
         // スプリントやしゃがみは外部の入力ハンドラからSetStatusされる想定
+    }
+    private void Carry()
+    {
+        if (_IsCarry == true)
+        {
+            SetStatus(PlayerStatus.None);
+        }
+        else if (_IsCarry == false) 
+        {
+            SetStatus(PlayerStatus.Carrying);
+        }
+     
     }
 
     // 状態遷移可能か判定（必要に応じて拡張）
