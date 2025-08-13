@@ -5,6 +5,7 @@ public enum PlayerStatus
 {
     None,
     Walking,
+    Carrying,
     Sprinting,
     Crouching,
 

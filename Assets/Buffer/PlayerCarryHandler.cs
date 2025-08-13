@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerCarryHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInputNotifier inputNotifier;
+    [SerializeField] private PlayerStatusBuffer statusBuffer;
 
     private void OnEnable()
     {
@@ -16,7 +17,13 @@ public class PlayerCarryHandler : MonoBehaviour
 
     private void HandleCarry(bool IsCarry )
     {
-        Debug.Log("キャリー処理");
-        // キャリーアクションの実装
+        if (IsCarry)
+        {
+            statusBuffer.SetStatus(PlayerStatus.Carrying);
+        }
+        else
+        {
+            statusBuffer.SetStatus(PlayerStatus.None);
+        }
     }
 }
