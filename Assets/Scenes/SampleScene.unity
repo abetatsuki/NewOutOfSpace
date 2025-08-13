@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputNotifier: {fileID: 907834070}
+  statusBuffer: {fileID: 907834073}
 --- !u!114 &907834070
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,20 +24,14 @@ public class PlayerStatusBuffer : MonoBehaviour
     private Vector2 _moveInput = Vector2.zero;
     public Vector2 MoveInput => _moveInput;
 
-    private bool _IsCarry = false;
-
-    public bool IsCarry => _IsCarry;
+   
 
     public void SetMoveInput(Vector2 input)
     {
         _moveInput = input;
         UpdateStatusFromInput();
     }
-    public void SetCarryInout(bool isCarry)
-    {
-        _IsCarry = isCarry;
-        Carry();
-    }
+    
 
   
 
@@ -72,14 +66,7 @@ public class PlayerStatusBuffer : MonoBehaviour
     }
     private void Carry()
     {
-        if (_IsCarry == true)
-        {
-            SetStatus(PlayerStatus.None);
-        }
-        else if (_IsCarry == false) 
-        {
-            SetStatus(PlayerStatus.Carrying);
-        }
+        
      
     }
 

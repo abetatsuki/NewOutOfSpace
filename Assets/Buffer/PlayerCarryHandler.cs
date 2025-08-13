@@ -1,9 +1,13 @@
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerCarryHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInputNotifier inputNotifier;
     [SerializeField] private PlayerStatusBuffer statusBuffer;
+    private bool _iscarry = false;
+    private PlayerStatus currentStatus = PlayerStatus.None;
+
 
     private void OnEnable()
     {
@@ -15,15 +19,25 @@ public class PlayerCarryHandler : MonoBehaviour
         inputNotifier.OnCarry -= HandleCarry;
     }
 
-    private void HandleCarry(bool IsCarry )
+    private void HandleCarry()
     {
-        if (IsCarry)
+      if(currentStatus == PlayerStatus.Carrying)
+        currentStatus = PlayerStatus.None;
+      else
+            currentStatus = PlayerStatus.Carrying;
+      UpdateCarryStatus();
+    }
+    private void UpdateCarryStatus()
+    {
+        statusBuffer.SetStatus(currentStatus);
+        if (currentStatus == PlayerStatus.Carrying)
         {
-            statusBuffer.SetStatus(PlayerStatus.Carrying);
+            Debug.Log("carry");
+
         }
         else
         {
-            statusBuffer.SetStatus(PlayerStatus.None);
+            Debug.Log("not carry");
         }
     }
 }
