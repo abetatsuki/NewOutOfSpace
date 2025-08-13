@@ -36,15 +36,15 @@ public class PlayerMoveHandler : MonoBehaviour
     }
     private float GetSpeedByStatus()
     {
-        switch (statusBuffer.CurrentStatus)
+        switch (statusBuffer.CurrentMoveStatus)
         {
-            case PlayerStatus.None:
+            case MoveStatus.None:
                 return 0f;
 
-            case PlayerStatus.Walking:
+            case MoveStatus.Walking:
                 return baseSpeed;
 
-            case PlayerStatus.Sprinting:
+            case MoveStatus.Sprinting:
                 return baseSpeed + sprintBonusSpeed;
 
             default:

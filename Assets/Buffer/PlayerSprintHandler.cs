@@ -20,12 +20,12 @@ public class PlayerSprintHandler : MonoBehaviour
     {
         if (isSprinting)
         {
-            statusBuffer.SetStatus(PlayerStatus.Sprinting);
+            statusBuffer.MoveSetStatus(MoveStatus.Sprinting);
         }
         else
         {
             // スプリント解除時は歩行に戻すなど状況に応じて調整
-            statusBuffer.SetStatus(PlayerStatus.Walking);
+            statusBuffer.MoveSetStatus(MoveStatus.Walking);
         }
     }
 }

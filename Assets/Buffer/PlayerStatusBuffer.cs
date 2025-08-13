@@ -1,84 +1,92 @@
 using UnityEngine;
 using System;
-using UnityEditor;
 
-public enum PlayerStatus
+public enum MoveStatus
 {
     None,
     Walking,
-    Carrying,
     Sprinting,
     Crouching,
+}
 
-    // 必要に応じて増やす
+public enum CarryStatus
+{
+    NotCarrying,
+    Carrying
 }
 
 public class PlayerStatusBuffer : MonoBehaviour
 {
-    // 状態変更通知イベント（必要なら）
-    public event Action<PlayerStatus> OnStatusChanged;
+    // 状態変更通知イベント
+    public event Action<MoveStatus> OnMoveStatusChanged;
+    public event Action<CarryStatus> OnCarryStatusChanged;
 
-    public PlayerStatus CurrentStatus { get; private set; } = PlayerStatus.None;
-   
+    public MoveStatus CurrentMoveStatus { get; private set; } = MoveStatus.None;
+    public CarryStatus CurrentCarryStatus { get; private set; } = CarryStatus.NotCarrying;
 
     private Vector2 _moveInput = Vector2.zero;
     public Vector2 MoveInput => _moveInput;
 
-   
-
+    // 入力を受け取って MoveStatus を更新
     public void SetMoveInput(Vector2 input)
     {
         _moveInput = input;
-        UpdateStatusFromInput();
+        UpdateMoveStatusFromInput();
     }
-    
 
-  
-
-    // 状態変更は必ずこのメソッドを通す
-    public void SetStatus(PlayerStatus newStatus)
+    // MoveStatus を更新する
+    public void MoveSetStatus(MoveStatus newStatus)
     {
-        if (CurrentStatus == newStatus) return;
+        if (CurrentMoveStatus == newStatus) return;
 
-        // 状態遷移ルールをここで管理
-        if (!CanTransition(CurrentStatus, newStatus))
+        if (!CanTransition(CurrentMoveStatus, newStatus))
         {
-            Debug.LogWarning($"状態遷移不可: {CurrentStatus} -> {newStatus}");
+            Debug.LogWarning($"状態遷移不可: {CurrentMoveStatus} -> {newStatus}");
             return;
         }
 
-        CurrentStatus = newStatus;
-        OnStatusChanged?.Invoke(CurrentStatus);
+        CurrentMoveStatus = newStatus;
+        OnMoveStatusChanged?.Invoke(CurrentMoveStatus);
     }
 
-    private void UpdateStatusFromInput()
+    // CarryStatus を更新する
+    public void CarrySetStatus(CarryStatus newStatus)
     {
-        // 入力による自動状態遷移例（必要なら）
+        if (CurrentCarryStatus == newStatus) return;
+
+        CurrentCarryStatus = newStatus;
+        OnCarryStatusChanged?.Invoke(CurrentCarryStatus);
+    }
+
+    // Carry をトグルする簡易メソッド
+    public void ToggleCarry()
+    {
+        CarrySetStatus(CurrentCarryStatus == CarryStatus.Carrying
+            ? CarryStatus.NotCarrying
+            : CarryStatus.Carrying);
+    }
+
+    // 入力から自動で MoveStatus を決定
+    private void UpdateMoveStatusFromInput()
+    {
         if (_moveInput == Vector2.zero)
         {
-            SetStatus(PlayerStatus.None);
+            MoveSetStatus(MoveStatus.None);
         }
-        else if (CurrentStatus == PlayerStatus.None)
+        else if (CurrentMoveStatus == MoveStatus.None)
         {
-            SetStatus(PlayerStatus.Walking);
+            MoveSetStatus(MoveStatus.Walking);
         }
-        // スプリントやしゃがみは外部の入力ハンドラからSetStatusされる想定
-    }
-    private void Carry()
-    {
-        
-     
+        // Sprint や Crouch は外部の入力ハンドラから SetStatus される想定
     }
 
-    // 状態遷移可能か判定（必要に応じて拡張）
-    private bool CanTransition(PlayerStatus from, PlayerStatus to)
+    // MoveStatus 遷移ルール
+    private bool CanTransition(MoveStatus from, MoveStatus to)
     {
-        // 例: SprintingからCrouchingは不可
-        if (from == PlayerStatus.Sprinting && to == PlayerStatus.Crouching)
+        // 例: Sprinting から Crouching は不可
+        if (from == MoveStatus.Sprinting && to == MoveStatus.Crouching)
             return false;
 
-        // その他のルールを追加可能
-
-        return true; // 特に制限なし
+        return true;
     }
 }
