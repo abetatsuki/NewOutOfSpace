@@ -30,7 +30,17 @@ public class CameraViewSwitcher : MonoBehaviour
 
     private void UpdateCameraView()
     {
-        topViewCamera.enabled = (CurrentViewMode == CameraViewMode.TopView);
-        sideViewCamera.enabled = (CurrentViewMode == CameraViewMode.SideView);
+        bool isTop = (CurrentViewMode == CameraViewMode.TopView);
+
+        // ƒJƒƒ‰‚Ì—LŒø/–³ŒøØ‚è‘Ö‚¦
+        topViewCamera.enabled = isTop;
+        sideViewCamera.enabled = !isTop;
+
+        // AudioListener ‚Ì—LŒø/–³ŒøØ‚è‘Ö‚¦
+        var topListener = topViewCamera.GetComponent<AudioListener>();
+        var sideListener = sideViewCamera.GetComponent<AudioListener>();
+
+        if (topListener != null) topListener.enabled = isTop;
+        if (sideListener != null) sideListener.enabled = !isTop;
     }
 }

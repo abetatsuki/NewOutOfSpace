@@ -10,6 +10,7 @@ public class PlayerInputNotifier : MonoBehaviour
     public event Action<bool> OnSprint;
     public event Action OnCarry;
     public event Action OnCamera;
+   
 
     private const string _MOVE_ACTION = "Move";
     private const string _SPRINT_ACTION = "Sprint";
