@@ -9,8 +9,8 @@ public enum CameraViewMode
 
 public class CamSwitcher : MonoBehaviour
 {
-    [SerializeField] private Camera firstPersonCamera;
-    [SerializeField] private Camera thirdPersonCamera;
+    [SerializeField] private Camera _firstPersonCamera;
+    [SerializeField] private Camera _thirdPersonCamera;
 
     public CameraViewMode CurrentViewMode { get; private set; } = CameraViewMode.FirstPerson;
 
@@ -34,12 +34,12 @@ public class CamSwitcher : MonoBehaviour
         bool isTop = (CurrentViewMode == CameraViewMode.FirstPerson);
 
         // ƒJƒƒ‰‚Ì—LŒø/–³ŒøØ‚è‘Ö‚¦
-        firstPersonCamera.enabled = isTop;
-        thirdPersonCamera.enabled = !isTop;
+        _firstPersonCamera.enabled = isTop;
+        _thirdPersonCamera.enabled = !isTop;
 
         // AudioListener ‚Ì—LŒø/–³ŒøØ‚è‘Ö‚¦
-        var topListener = firstPersonCamera.GetComponent<AudioListener>();
-        var sideListener = thirdPersonCamera.GetComponent<AudioListener>();
+        var topListener = _firstPersonCamera.GetComponent<AudioListener>();
+        var sideListener = _thirdPersonCamera.GetComponent<AudioListener>();
 
         if (topListener != null) topListener.enabled = isTop;
         if (sideListener != null) sideListener.enabled = !isTop;
@@ -53,8 +53,8 @@ public class CamSwitcher : MonoBehaviour
         get
         {
             return CurrentViewMode == CameraViewMode.FirstPerson
-                ? firstPersonCamera
-                : thirdPersonCamera;
+                ? _firstPersonCamera
+                : _thirdPersonCamera;
         }
     }
    

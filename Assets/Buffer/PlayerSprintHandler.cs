@@ -3,29 +3,29 @@ using UnityEngine;
 
 public class PlayerSprintHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerInputNotifier inputNotifier;
-    [SerializeField] private PlayerStatusBuffer statusBuffer;
+    [SerializeField] private PlayerInputNotifier _inputNotifier;
+    [SerializeField] private PlayerStatusBuffer _statusBuffer;
 
     private void OnEnable()
     {
-        inputNotifier.OnSprint += HandleSprint;
+        _inputNotifier.OnSprint += HandleSprint;
     }
 
     private void OnDisable()
     {
-        inputNotifier.OnSprint -= HandleSprint;
+        _inputNotifier.OnSprint -= HandleSprint;
     }
 
     private void HandleSprint(bool isSprinting)
     {
         if (isSprinting)
         {
-            statusBuffer.MoveSetStatus(MoveStatus.Sprinting);
+            _statusBuffer.MoveSetStatus(MoveStatus.Sprinting);
         }
         else
         {
             // スプリント解除時は歩行に戻すなど状況に応じて調整
-            statusBuffer.MoveSetStatus(MoveStatus.Walking);
+            _statusBuffer.MoveSetStatus(MoveStatus.Walking);
         }
     }
 }

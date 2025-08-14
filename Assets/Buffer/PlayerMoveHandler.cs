@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class PlayerMoveHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerInputNotifier inputNotifier;
-    [SerializeField] private PlayerStatusBuffer statusBuffer;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private PlayerInputNotifier _inputNotifier;
+    [SerializeField] private PlayerStatusBuffer _statusBuffer;
+    [SerializeField] private Rigidbody _rb;
 
-    [SerializeField] private float baseSpeed = 5f;
-    [SerializeField] private float sprintBonusSpeed = 3f;
+    [SerializeField] private float _baseSpeed = 5f;
+    [SerializeField] private float _sprintBonusSpeed = 3f;
 
     private void OnEnable()
     {
-        inputNotifier.OnMove += statusBuffer.SetMoveInput;
+        _inputNotifier.OnMove += _statusBuffer.SetMoveInput;
     }
 
     private void OnDisable()
     {
-        inputNotifier.OnMove -= statusBuffer.SetMoveInput;
+        _inputNotifier.OnMove -= _statusBuffer.SetMoveInput;
     }
 
     private void FixedUpdate()
@@ -26,29 +26,29 @@ public class PlayerMoveHandler : MonoBehaviour
     }
     private void MovePlayer()
     {
-        Vector2 input = statusBuffer.MoveInput;
+        Vector2 input = _statusBuffer.MoveInput;
         Vector3 moveDir = new Vector3(input.x, 0, input.y);
 
         float speed = GetSpeedByStatus();
 
         Vector3 velocity = moveDir * speed;
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+        _rb.linearVelocity = new Vector3(velocity.x, _rb.linearVelocity.y, velocity.z);
     }
     private float GetSpeedByStatus()
     {
-        switch (statusBuffer.CurrentMoveStatus)
+        switch (_statusBuffer.CurrentMoveStatus)
         {
             case MoveStatus.None:
                 return 0f;
 
             case MoveStatus.Walking:
-                return baseSpeed;
+                return _baseSpeed;
 
             case MoveStatus.Sprinting:
-                return baseSpeed + sprintBonusSpeed;
+                return _baseSpeed + _sprintBonusSpeed;
 
             default:
-                return baseSpeed;
+                return _baseSpeed;
         }
     }
 }

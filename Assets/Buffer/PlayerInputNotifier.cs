@@ -12,49 +12,49 @@ public class PlayerInputNotifier : MonoBehaviour
     public event Action OnCamera;
    
 
-    private const string _MOVE_ACTION = "Move";
-    private const string _SPRINT_ACTION = "Sprint";
-    private const string _CARRY_ACTION = "Carry";
-    private const string _CAMERA_ACTION = "ToggleView";
+    private const string MOVE_ACTION = "Move";
+    private const string SPRINT_ACTION = "Sprint";
+    private const string CARRY_ACTION = "Carry";
+    private const string CAMERA_ACTION = "ToggleView";
 
-    private InputAction moveAction;
-    private InputAction sprintAction;
-    private InputAction carryAction;
-    private InputAction cameraAction;
+    private InputAction _moveAction;
+    private InputAction _sprintAction;
+    private InputAction _carryAction;
+    private InputAction _cameraAction;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions[_MOVE_ACTION];
-        sprintAction = playerInput.actions[_SPRINT_ACTION];
-        carryAction = playerInput.actions[_CARRY_ACTION];
-        cameraAction = playerInput.actions[_CAMERA_ACTION];
+        _moveAction = playerInput.actions[MOVE_ACTION];
+        _sprintAction = playerInput.actions[SPRINT_ACTION];
+        _carryAction = playerInput.actions[CARRY_ACTION];
+        _cameraAction = playerInput.actions[CAMERA_ACTION];
     }
 
     private void OnEnable()
     {
-        moveAction.performed += ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
-        moveAction.canceled += ctx => OnMove?.Invoke(Vector2.zero);
+        _moveAction.performed += ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
+        _moveAction.canceled += ctx => OnMove?.Invoke(Vector2.zero);
 
-        sprintAction.performed += ctx => OnSprint?.Invoke(true);
-        sprintAction.canceled += ctx => OnSprint?.Invoke(false);
+        _sprintAction.performed += ctx => OnSprint?.Invoke(true);
+        _sprintAction.canceled += ctx => OnSprint?.Invoke(false);
 
-        carryAction.performed += ctx => OnCarry?.Invoke();
+        _carryAction.performed += ctx => OnCarry?.Invoke();
      
 
-        cameraAction.performed += ctx => OnCamera?.Invoke();
+        _cameraAction.performed += ctx => OnCamera?.Invoke();
     }
 
     private void OnDisable()
     {
-        moveAction.performed -= ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
-        moveAction.canceled -= ctx => OnMove?.Invoke(Vector2.zero);
+        _moveAction.performed -= ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
+        _moveAction.canceled -= ctx => OnMove?.Invoke(Vector2.zero);
 
-        sprintAction.performed -= ctx => OnSprint?.Invoke(true);
-        sprintAction.canceled -= ctx => OnSprint?.Invoke(false);
+        _sprintAction.performed -= ctx => OnSprint?.Invoke(true);
+        _sprintAction.canceled -= ctx => OnSprint?.Invoke(false);
 
-        carryAction.performed += ctx => OnCarry?.Invoke();
+        _carryAction.performed += ctx => OnCarry?.Invoke();
        
-        cameraAction.performed -= ctx => OnCamera?.Invoke();
+        _cameraAction.performed -= ctx => OnCamera?.Invoke();
     }
 }

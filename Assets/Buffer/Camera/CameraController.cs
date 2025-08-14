@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private CamSwitcher viewSwitcher;
-    [SerializeField] private PlayerInputNotifier inputNotifier;
+    [SerializeField] private CamSwitcher _viewSwitcher;
+    [SerializeField] private PlayerInputNotifier _inputNotifier;
 
     private void OnEnable()
     {
-        inputNotifier.OnCamera += HandleCameraToggle;
+        _inputNotifier.OnCamera += HandleCameraToggle;
     }
 
     private void OnDisable()
     {
-        inputNotifier.OnCamera -= HandleCameraToggle;
+        _inputNotifier.OnCamera -= HandleCameraToggle;
     }
 
     private void HandleCameraToggle()
     {
-        viewSwitcher.ToggleView();
+        _viewSwitcher.ToggleView();
     }
 
 }
