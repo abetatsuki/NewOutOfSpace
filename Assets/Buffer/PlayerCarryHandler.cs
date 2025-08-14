@@ -26,4 +26,6 @@ public class PlayerCarryHandler : MonoBehaviour
         else
             Debug.Log("not carry");
     }
+
+
 }

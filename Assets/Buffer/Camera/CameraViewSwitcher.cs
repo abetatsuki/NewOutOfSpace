@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public enum CameraViewMode
 {
-    TopView,     // è„Ç©ÇÁ
-    SideView     // â°Ç©ÇÁ
+    FirstPerson,     // è„Ç©ÇÁ
+    ThirdPerson     // â°Ç©ÇÁ
 }
 
 public class CameraViewSwitcher : MonoBehaviour
 {
-    [SerializeField] private Camera topViewCamera;
-    [SerializeField] private Camera sideViewCamera;
+    [SerializeField] private Camera firstPersonCamera;
+    [SerializeField] private Camera thirdPersonCamera;
 
-    public CameraViewMode CurrentViewMode { get; private set; } = CameraViewMode.TopView;
+    public CameraViewMode CurrentViewMode { get; private set; } = CameraViewMode.FirstPerson;
 
     private void Start()
     {
@@ -20,27 +21,45 @@ public class CameraViewSwitcher : MonoBehaviour
 
     public void ToggleView()
     {
-        if (CurrentViewMode == CameraViewMode.TopView)
-            CurrentViewMode = CameraViewMode.SideView;
+        if (CurrentViewMode == CameraViewMode.FirstPerson)
+            CurrentViewMode = CameraViewMode.ThirdPerson;
         else
-            CurrentViewMode = CameraViewMode.TopView;
+            CurrentViewMode = CameraViewMode.FirstPerson;
 
         UpdateCameraView();
     }
 
     private void UpdateCameraView()
     {
-        bool isTop = (CurrentViewMode == CameraViewMode.TopView);
+        bool isTop = (CurrentViewMode == CameraViewMode.FirstPerson);
 
         // ÉJÉÅÉâÇÃóLå¯/ñ≥å¯êÿÇËë÷Ç¶
-        topViewCamera.enabled = isTop;
-        sideViewCamera.enabled = !isTop;
+        firstPersonCamera.enabled = isTop;
+        thirdPersonCamera.enabled = !isTop;
 
         // AudioListener ÇÃóLå¯/ñ≥å¯êÿÇËë÷Ç¶
-        var topListener = topViewCamera.GetComponent<AudioListener>();
-        var sideListener = sideViewCamera.GetComponent<AudioListener>();
+        var topListener = firstPersonCamera.GetComponent<AudioListener>();
+        var sideListener = thirdPersonCamera.GetComponent<AudioListener>();
 
         if (topListener != null) topListener.enabled = isTop;
         if (sideListener != null) sideListener.enabled = !isTop;
     }
+    public CameraViewMode GetCameraStatus()
+    {
+        return CurrentViewMode;
+    }
+    public Camera CurrentCamera
+    {
+        get
+        {
+            return CurrentViewMode == CameraViewMode.FirstPerson
+                ? firstPersonCamera
+                : thirdPersonCamera;
+        }
+    }
+   
+
+
+
+
 }
