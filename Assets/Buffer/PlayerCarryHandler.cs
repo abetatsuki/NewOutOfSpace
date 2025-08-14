@@ -22,7 +22,7 @@ public class PlayerCarryHandler : MonoBehaviour
         _statusBuffer.ToggleCarry();
 
         // デバッグログ
-        if (_statusBuffer.CurrentCarryStatus == CarryStatus.Carrying)
+        if (_statusBuffer.CurrentCarryStatus == CarryStatus.Carrying)//ステータスを持っている状態で変更できるようにしろ
             _rayCastController.raycastCon();
         else
             Debug.Log("not carry");
