@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df6814bc6f691f44851942c0b1efddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewSwitcher: {fileID: 79709677}
-  inputNotifier: {fileID: 907834070}
+  _viewSwitcher: {fileID: 79709677}
+  _inputNotifier: {fileID: 907834070}
 --- !u!114 &79709677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c391bb0c73c5e04190beef218c51678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topViewCamera: {fileID: 1298779102}
-  sideViewCamera: {fileID: 330585545}
+  _firstPersonCamera: {fileID: 330585545}
+  _thirdPersonCamera: {fileID: 1298779102}
 --- !u!4 &79709678
 Transform:
   m_ObjectHideFlags: 0
@@ -554,8 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d723a068d6dbe745acaedf8a1aaee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputNotifier: {fileID: 907834070}
-  statusBuffer: {fileID: 907834073}
+  _inputNotifier: {fileID: 907834070}
+  _statusBuffer: {fileID: 907834073}
 --- !u!114 &907834068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,11 +568,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4ee60b365ac7e4b89243d1969c4fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputNotifier: {fileID: 907834070}
-  statusBuffer: {fileID: 907834073}
-  rb: {fileID: 907834072}
-  baseSpeed: 5
-  sprintBonusSpeed: 3
+  _inputNotifier: {fileID: 907834070}
+  _statusBuffer: {fileID: 907834073}
+  _rb: {fileID: 907834072}
+  _baseSpeed: 5
+  _sprintBonusSpeed: 3
 --- !u!114 &907834069
 MonoBehaviour:
   m_ObjectHideFlags: 0
