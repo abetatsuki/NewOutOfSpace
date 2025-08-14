@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class RayCastCon : MonoBehaviour
+public class RayCastController : MonoBehaviour
 {
     [SerializeField] private CamSwitcher _camSwitcher;
     [SerializeField] private float _rayDistance = 100f;
 
-    private void raycast()
+    public void raycastCon()
     {
         Camera cam = _camSwitcher.CurrentCamera;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
