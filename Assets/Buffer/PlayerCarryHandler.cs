@@ -2,27 +2,28 @@ using UnityEngine;
 
 public class PlayerCarryHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerInputNotifier inputNotifier;
-    [SerializeField] private PlayerStatusBuffer statusBuffer;
+    [SerializeField] private PlayerInputNotifier _inputNotifier;
+    [SerializeField] private PlayerStatusBuffer _statusBuffer;
+    [SerializeField] private RayCastController _rayCastController;
 
     private void OnEnable()
     {
-        inputNotifier.OnCarry += HandleCarry;
+        _inputNotifier.OnCarry += HandleCarry;
     }
 
     private void OnDisable()
     {
-        inputNotifier.OnCarry -= HandleCarry;
+        _inputNotifier.OnCarry -= HandleCarry;
     }
 
     private void HandleCarry()
     {
         // statusBuffer 側のトグルを呼ぶだけ
-        statusBuffer.ToggleCarry();
+        _statusBuffer.ToggleCarry();
 
         // デバッグログ
-        if (statusBuffer.CurrentCarryStatus == CarryStatus.Carrying)
-            Debug.Log("carry");
+        if (_statusBuffer.CurrentCarryStatus == CarryStatus.Carrying)
+            _rayCastController.raycastCon();
         else
             Debug.Log("not carry");
     }
