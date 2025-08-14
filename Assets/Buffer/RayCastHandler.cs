@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class RayCastHandler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private CamSwitcher camSwitcher;
+    [SerializeField] private float rayDistance = 100f;
 
-    // Update is called once per frame
-    void Update()
+    private void raycast()
     {
-        
+        Camera cam = camSwitcher.CurrentCamera;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(ray,out RaycastHit hit, rayDistance))
+        {
+            Debug.Log($"Raycast hit:{hit.collider.name}");
+        }
     }
 }

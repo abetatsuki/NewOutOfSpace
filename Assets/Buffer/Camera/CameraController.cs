@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private CameraViewSwitcher viewSwitcher;
+    [SerializeField] private CamSwitcher viewSwitcher;
     [SerializeField] private PlayerInputNotifier inputNotifier;
 
     private void OnEnable()

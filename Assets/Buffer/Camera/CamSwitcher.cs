@@ -7,7 +7,7 @@ public enum CameraViewMode
     ThirdPerson     // ‰¡‚©‚ç
 }
 
-public class CameraViewSwitcher : MonoBehaviour
+public class CamSwitcher : MonoBehaviour
 {
     [SerializeField] private Camera firstPersonCamera;
     [SerializeField] private Camera thirdPersonCamera;
