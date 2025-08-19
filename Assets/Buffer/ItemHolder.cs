@@ -5,17 +5,17 @@ public class ItemHolder : MonoBehaviour
     [SerializeField] private Transform _holdPoint;
     private GameObject _currentItem;
 
-    // RaycastController ��n���ČĂԂ����� Pickup/Drop ����
+  
     public void HandlePickupInput(RayCastController raycastController)
     {
-        // �A�C�e���������Ă���Ζ������� Drop
+       
         if (_currentItem != null)
         {
             DropCurrentItem();
             return;
         }
 
-        // �A�C�e���������Ă��Ȃ���� Raycast ��񂩂� Pickup
+       
         GameObject item = raycastController.GetItemUnderMouse();
         if (item != null)
         {
