@@ -20,7 +20,11 @@ public class ItemCon : MonoBehaviour
     
     public void OnCarryStatusChanged(CarryStatus carrystatus)
     {
-
+        if (CarryStatus.NotCarrying == carrystatus) return;
+        if (CarryStatus.Carrying == carrystatus) 
+        {
+            
+        }
     }
 
 }
