@@ -8,7 +8,7 @@ public class ItemReal : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         DirtData targetData = other.GetComponent<DirtData>();
-        if (targetData = null )return;
+        if (targetData == null )return;
 
         targetData.TakeDamege(cleanpoint);
         Debug.Log($"{other.name}‚Ì‰˜‚ê‚ğ{cleanpoint}Œ¸‚ç‚µ‚½I");

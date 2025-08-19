@@ -1011,7 +1011,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &1956949259
 BoxCollider:
@@ -1028,7 +1028,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1096,7 +1096,7 @@ Transform:
   m_GameObject: {fileID: 1956949257}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.92, y: 1.15, z: 0}
+  m_LocalPosition: {x: 2.92, y: 0.17, z: 0}
   m_LocalScale: {x: 0.33, y: 0.29, z: 0.35}
   m_ConstrainProportionsScale: 0
   m_Children: []
