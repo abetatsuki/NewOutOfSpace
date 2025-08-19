@@ -10,17 +10,20 @@ public class PlayerInputNotifier : MonoBehaviour
     public event Action<bool> OnSprint;
     public event Action  OnCarry;
     public event Action OnCamera;
+    public event Action OnAttack;
    
 
     private const string MOVE_ACTION = "Move";
     private const string SPRINT_ACTION = "Sprint";
     private const string CARRY_ACTION = "Carry";
     private const string CAMERA_ACTION = "ToggleView";
+    private const string ATTACK_ACTION = "Attack";
 
     private InputAction _moveAction;
     private InputAction _sprintAction;
     private InputAction _carryAction;
     private InputAction _cameraAction;
+    private InputAction _attackAction;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class PlayerInputNotifier : MonoBehaviour
         _sprintAction = playerInput.actions[SPRINT_ACTION];
         _carryAction = playerInput.actions[CARRY_ACTION];
         _cameraAction = playerInput.actions[CAMERA_ACTION];
+        _attackAction = playerInput.actions[ATTACK_ACTION];
     }
 
     private void OnEnable()
@@ -40,9 +44,10 @@ public class PlayerInputNotifier : MonoBehaviour
         _sprintAction.canceled += ctx => OnSprint?.Invoke(false);
 
         _carryAction.performed += ctx => OnCarry?.Invoke();
-     
-
+        
         _cameraAction.performed += ctx => OnCamera?.Invoke();
+
+        _attackAction.performed += ctx => OnAttack?.Invoke();
     }
 
     private void OnDisable()
@@ -53,8 +58,10 @@ public class PlayerInputNotifier : MonoBehaviour
         _sprintAction.performed -= ctx => OnSprint?.Invoke(true);
         _sprintAction.canceled -= ctx => OnSprint?.Invoke(false);
 
-        _carryAction.performed += ctx => OnCarry?.Invoke();
+        _carryAction.performed -= ctx => OnCarry?.Invoke();
        
         _cameraAction.performed -= ctx => OnCamera?.Invoke();
+
+        _attackAction.performed-= ctx => OnAttack?.Invoke();
     }
 }

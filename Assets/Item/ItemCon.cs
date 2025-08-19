@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ItemCon : MonoBehaviour
 {
-    [SerializeField]ItemData item;
-    [SerializeField]PlayerInputNotifier playerInputNotifier;
-    [SerializeField]PlayerStatusBuffer playerStatusBuffer;
+    [SerializeField]private ItemData _item;
+    [SerializeField]private PlayerInputNotifier _playerInputNotifier;
+    [SerializeField]private PlayerStatusBuffer _playerStatusBuffer;
+
 }
