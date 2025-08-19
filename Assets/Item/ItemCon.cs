@@ -5,7 +5,8 @@ public class ItemCon : MonoBehaviour
     [SerializeField]private ItemData _item;
     [SerializeField]private PlayerInputNotifier _playerInputNotifier;
     [SerializeField]private PlayerStatusBuffer _playerStatusBuffer;
-    
+    [SerializeField] private ItemReal _ItemReal;
+    ItemType _itemType = ItemType.UseItem;
 
     private void OnEnable()
     {
@@ -21,9 +22,9 @@ public class ItemCon : MonoBehaviour
     public void OnCarryStatusChanged(CarryStatus carrystatus)
     {
         if (CarryStatus.NotCarrying == carrystatus) return;
-        if (CarryStatus.Carrying == carrystatus) 
+        if (CarryStatus.Carrying == carrystatus&&_itemType == ItemType.UseItem) 
         {
-            
+            _ItemReal.Test();
         }
     }
 
