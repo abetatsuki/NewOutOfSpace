@@ -15,7 +15,7 @@ public class ItemData : ScriptableObject
 
 public enum ItemType
 {
-   Block,
-   Backet,
+  UseItem,
+  PutItem,
 
 }
