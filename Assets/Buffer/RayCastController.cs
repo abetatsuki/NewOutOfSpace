@@ -4,9 +4,13 @@ public class RayCastController : MonoBehaviour
 {
     [SerializeField] private CamSwitcher _camSwitcher;
     [SerializeField] private float _rayDistance = 100f;
+    [SerializeField] private float _pickupRange = 5f;
+
+    [SerializeField] private Transform _player;
 
     public GameObject GetItemUnderMouse()
     {
+
         Camera cam = _camSwitcher.CurrentCamera;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -14,9 +18,16 @@ public class RayCastController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Item"))
             {
-                return hit.collider.gameObject;
+                // プレイヤーとアイテムの距離を測る
+                float distanceToPlayer = Vector3.Distance(_player.position, hit.collider.transform.position);
+
+                if (distanceToPlayer <= _pickupRange)
+                {
+                    return hit.collider.gameObject; // プレイヤーが近いならOK
+                }
             }
         }
+    
         return null;
     }
 }

@@ -699,6 +699,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camSwitcher: {fileID: 79709677}
   _rayDistance: 100
+  _pickupRange: 5
+  _player: {fileID: 907834066}
 --- !u!114 &907834076
 MonoBehaviour:
   m_ObjectHideFlags: 0
