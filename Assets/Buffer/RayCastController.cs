@@ -5,7 +5,6 @@ public class RayCastController : MonoBehaviour
     [SerializeField] private CamSwitcher _camSwitcher;
     [SerializeField] private float _rayDistance = 100f;
     [SerializeField] private float _pickupRange = 5f;
-
     [SerializeField] private Transform _player;
 
     public GameObject GetItemUnderMouse()
@@ -16,6 +15,7 @@ public class RayCastController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance))
         {
+            Item itemData = hit.collider.GetComponent<Item>();
             if (hit.collider.CompareTag("Item"))
             {
                 // プレイヤーとアイテムの距離を測る

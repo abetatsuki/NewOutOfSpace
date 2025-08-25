@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class DirtData : MonoBehaviour
 {
-    public int POINT = 100;
+    [SerializeField] int POINT = 10;
+   
     public void TakeDamege(int amount)
     {
         POINT -= amount;
-        if (POINT < 0) POINT = 0;
+        if (POINT < 0)
+        {
+            POINT = 0;
+            Destroy(gameObject);
+        }
     }
+
 }

@@ -41,6 +41,8 @@ public class ItemHolder : MonoBehaviour
         item.transform.SetParent(_holdPoint);
         item.transform.localPosition = Vector3.zero;
         item.transform.localRotation = Quaternion.identity;
+       
+        
 
         _currentItem = item;
     }
