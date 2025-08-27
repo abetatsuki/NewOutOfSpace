@@ -1,16 +1,33 @@
 using UnityEngine;
-
-public class SceneController : MonoBehaviour
+using UnityEngine.SceneManagement;
+public  static class SceneController 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    static int  mainScene = 0 ;
+ public static void LoadMainScene()
     {
-        
+        SceneManager.LoadScene(mainScene);
+    }
+    public static void LoadNextScene()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if(currentScene  < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(currentScene + 1 );
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void LoadPreviousScene()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentScene > 0)
+            SceneManager.LoadScene(currentScene + 1);
+    }
+
+    public static void LoadScene(int index)
     {
         
+
+        if (index>= 0&& index < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(index);
     }
 }
