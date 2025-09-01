@@ -3,6 +3,7 @@ using UnityEngine;
 public class ItemHolder : MonoBehaviour
 {
     [SerializeField] private Transform _holdPoint;
+    [SerializeField] private PlayerStatusBuffer _playerStatusBuffer;
     private GameObject _currentItem;
 
   
@@ -25,7 +26,7 @@ public class ItemHolder : MonoBehaviour
 
     private void PickupItem(GameObject item)
     {
-        Debug.Log("pickup");
+       _playerStatusBuffer.CarrySetStatus(CarryStatus.Carrying);
 
         Rigidbody rb = item.GetComponent<Rigidbody>();
         if (rb != null)
@@ -49,6 +50,7 @@ public class ItemHolder : MonoBehaviour
     public void DropCurrentItem()
     {
         if (_currentItem == null) return;
+        _playerStatusBuffer.CarrySetStatus(CarryStatus.NotCarrying);
 
         Rigidbody rb = _currentItem.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = false;
