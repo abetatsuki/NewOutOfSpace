@@ -11,8 +11,8 @@ public class ItemReal : MonoBehaviour
         DirtData targetData = other.GetComponent<DirtData>();
         if (targetData == null )return;
 
-        targetData.TakeDamage(item.value);
-        Debug.Log($"{other.name}の汚れを{item.value}減らした！");
+        targetData.TakeDamage(item.Damage);
+        Debug.Log($"{other.name}のクリーン{item.Damage}ダメージ与えた！");
     }
     public void Test()
     {
