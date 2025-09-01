@@ -39,13 +39,7 @@ public class Test : MonoBehaviour
     {
         
         if(hp>0)timer += Time.deltaTime;
-        if (timer > 1)
-        {
-            TakeDamege(10);
-            timer = 0;
-
-
-        }
+       
         if (hp == 0) Debug.Log("GAMEOVER");
 
     }

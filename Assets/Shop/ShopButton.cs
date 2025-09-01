@@ -21,13 +21,13 @@ public class ShopButton : MonoBehaviour
         switch (targetShopScene)
         {
             case TargetShopScene.ShopOpen:
-                Debug.Log("Open");
+                Button.onClick.AddListener(() => Debug.Log("Open"));
                 break;
                 case TargetShopScene.ShopBuy:
-                Debug.Log("Buy");
+                Button.onClick.AddListener(() => Debug.Log("Buy"));
                 break;
                 case TargetShopScene.ShopSell:
-                Debug.Log("sell");
+                Button.onClick.AddListener(() => Debug.Log("Sell"));
                 break;
         }
     }
