@@ -2,5 +2,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField]ItemData item;
+    [SerializeField] private ItemData itemdata;
+    public ItemData ItemData => itemdata; // 読み取り専用プロパティ
 }

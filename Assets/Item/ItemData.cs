@@ -6,7 +6,9 @@ public class ItemData : ScriptableObject
     public string itemName;      // 名前
     public Sprite icon;          // アイコン画像
     public string description;   // 説明文
-    public int Damage = 1;　
+    public int Damage = 1;
+    public int buymoney =1;
+    public int sellmoney = 1;
 
     public ItemType type;        // アイテムの種類
 
