@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DirtData : MonoBehaviour,IDamageble
 {
-    [SerializeField] int POINT = 10;
+    public int POINT = 10;
    
     public void TakeDamage(int amount)
     {
