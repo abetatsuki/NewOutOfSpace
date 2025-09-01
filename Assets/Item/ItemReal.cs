@@ -11,7 +11,7 @@ public class ItemReal : MonoBehaviour
         DirtData targetData = other.GetComponent<DirtData>();
         if (targetData == null )return;
 
-        targetData.TakeDamege(item.value);
+        targetData.TakeDamage(item.value);
         Debug.Log($"{other.name}‚Ì‰˜‚ê‚ğ{item.value}Œ¸‚ç‚µ‚½I");
     }
     public void Test()

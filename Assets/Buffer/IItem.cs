@@ -1,15 +1,28 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
-interface UseImte //左クリックで使用できるitem
+interface IUseItem //左クリックで使用できるitem
 {
     void Use();
 }
-interface PutItem //置くだけで効果があるitem
+interface IPutItem //置くだけで効果があるitem
 {
-    void Put();
+    void Put(Vector3 point);
+}
+interface IDamageble
+{
+    void TakeDamage(int point);
 }
 
-public class IItem : MonoBehaviour
+public class IItem : IUseItem, IPutItem
 {
-    
+    public void Use()
+    {
+        Debug.Log("UseItem");
+    }
+    public void Put(Vector3 point)
+    {
+       string message = point.ToString();
+        Debug.Log(message);
+    }
 }

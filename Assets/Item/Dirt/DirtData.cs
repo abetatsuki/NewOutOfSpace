@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class DirtData : MonoBehaviour
+public class DirtData : MonoBehaviour,IDamageble
 {
     [SerializeField] int POINT = 10;
    
-    public void TakeDamege(int amount)
+    public void TakeDamage(int amount)
     {
         POINT -= amount;
         if (POINT < 0)
