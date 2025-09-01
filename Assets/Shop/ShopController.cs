@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class ShopController :Moneysum
 {
-     
-        
-    public string[]stringname;
-   // [SerializeField]Item item;
   
 
 
@@ -13,6 +9,7 @@ public class ShopController :Moneysum
     {
         
     }
+
     public void ShopBuy(Item item)
     {
        
