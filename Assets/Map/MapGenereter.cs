@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class SystemManager : MonoBehaviour
 {
 
@@ -14,6 +14,7 @@ public class SystemManager : MonoBehaviour
 
     public GameObject WallObject;
     public GameObject DoorObject; // ドアオブジェクトを追加
+    public GameObject DustCube;
 
     const int roomMinHeight = 5;
     const int roomMaxHeight = 10;
@@ -29,6 +30,8 @@ public class SystemManager : MonoBehaviour
     // ドア生成の設定
     const int doorPlacementChance = 101; // ドアを設置する確率（パーセント）
     const int minRoadLengthForDoor = 1; // ドアを設置するのに必要な最小道路長
+
+    private List<List<Vector2Int>> roomList = new List<List<Vector2Int>>();
 
     void Start()
     {
