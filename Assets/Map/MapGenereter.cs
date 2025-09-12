@@ -219,22 +219,37 @@ public class SystemManager : MonoBehaviour
     private bool CreateRoomData(int roomHeight, int roomWidth, int roomPointX, int roomPointY)
     {
         bool isRoad = false;
+        List<Vector2Int> currentRoom = new List<Vector2Int>();
+
         for (int i = 0; i < roomHeight; i++)
         {
             for (int j = 0; j < roomWidth; j++)
             {
-                if (Map[roomPointY + i, roomPointX + j] == road)
+                int x = roomPointX + j;
+                int y = roomPointY + i;
+
+                if (Map[y, x] == road)
                 {
                     isRoad = true;
                 }
                 else
                 {
-                    Map[roomPointY + i, roomPointX + j] = road;
+                    Map[y, x] = road;
                 }
+
+                currentRoom.Add(new Vector2Int(x, y));
             }
         }
+
+        // 部屋として保存
+        if (currentRoom.Count > 0)
+        {
+            roomList.Add(currentRoom);
+        }
+
         return isRoad;
     }
+
 
     /// <summary>
     /// 道データを生成
@@ -337,10 +352,21 @@ public class SystemManager : MonoBehaviour
                 }
                 else if (Map[i, j] == door)
                 {
-                    // ドアオブジェクトを生成
                     Instantiate(DoorObject, new Vector3(j - MapWidth / 2, 0, i - MapHeight / 2), Quaternion.identity);
                 }
             }
         }
+
+        // 各部屋に DustCube を配置
+        foreach (var room in roomList)
+        {
+            if (room.Count > 0)
+            {
+                // 部屋の中からランダムな座標を選ぶ
+                Vector2Int pos = room[Random.Range(0, room.Count)];
+                Instantiate(DustCube, new Vector3(pos.x - MapWidth / 2, 0, pos.y - MapHeight / 2), Quaternion.identity);
+            }
+        }
     }
+
 }
