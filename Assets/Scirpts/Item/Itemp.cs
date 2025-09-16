@@ -2,40 +2,40 @@ using UnityEngine;
 
 public class Itemp : MonoBehaviour
 {
-    [SerializeField] private Transform heldItemParent; // ƒAƒCƒeƒ€‚ğ‚ÂˆÊ’uiè‚ÌTransform‚È‚Çj
+    [SerializeField] private Transform heldItemParent; // ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã¤ä½ç½®ï¼ˆæ‰‹ã®Transformãªã©ï¼‰
     [SerializeField] private float throwForce = 10f;
 
-    // ƒvƒŒƒCƒ„[‚ªƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã‹ã©ã†ã‹
     public bool HasItem()
     {
         return heldItemParent.childCount > 0;
     }
 
-    // ƒAƒCƒeƒ€‚ğ“Š‚°‚éˆ—
+    // ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŠ•ã’ã‚‹å‡¦ç†
     public void ThrowItem()
     {
         if (!HasItem())
         {
-            Debug.Log("ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚È‚¢‚Ì‚Å“Š‚°‚ç‚ê‚Ü‚¹‚ñ");
+            Debug.Log("ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ãªã„ã®ã§æŠ•ã’ã‚‰ã‚Œã¾ã›ã‚“");
             return;
         }
 
-        // 1. Å‰‚ÌqƒIƒuƒWƒFƒNƒg‚ğæ“¾
+        // 1. æœ€åˆã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
         Transform child = heldItemParent.GetChild(0);
 
-        // 2. e‚©‚çØ‚è—£‚·
+        // 2. è¦ªã‹ã‚‰åˆ‡ã‚Šé›¢ã™
         child.SetParent(null);
 
-        // 3. Rigidbody‚ğæ“¾i–³‚¯‚ê‚Î’Ç‰Áj
+        // 3. Rigidbodyã‚’å–å¾—ï¼ˆç„¡ã‘ã‚Œã°è¿½åŠ ï¼‰
         Rigidbody rb = child.GetComponent<Rigidbody>();
         if (rb == null)
         {
             rb = child.gameObject.AddComponent<Rigidbody>();
         }
        rb.isKinematic = false;
-        // 4. ‘O•ûŒü‚É—Í‚ğ‰Á‚¦‚é
+        // 4. å‰æ–¹å‘ã«åŠ›ã‚’åŠ ãˆã‚‹
         rb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
 
-        Debug.Log("ƒAƒCƒeƒ€‚ğ“Š‚°‚½I");
+        Debug.Log("ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŠ•ã’ãŸï¼");
     }
 }

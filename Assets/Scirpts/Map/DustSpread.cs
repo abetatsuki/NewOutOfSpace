@@ -21,7 +21,7 @@ public class DustSpread : MonoBehaviour
         Vector3 currentPos = transform.position;
         spawned.Add(currentPos);
 
-        Debug.Log($"起点ブロック位置: {currentPos}");
+        //Debug.Log($"起点ブロック位置: {currentPos}");
 
         for (int i = 0; i < blockCount; i++)
         {
@@ -37,12 +37,12 @@ public class DustSpread : MonoBehaviour
             {
                 Instantiate(blockPrefab, nextPos, Quaternion.identity);
                 spawned.Add(nextPos);
-                Debug.Log($"[{i}] ブロック生成: {nextPos}");
+               // Debug.Log($"[{i}] ブロック生成: {nextPos}");
                 currentPos = nextPos;
             }
             else
             {
-                Debug.Log($"[{i}] 生成失敗（ブロック or 壁あり）: {nextPos}");
+               /// Debug.Log($"[{i}] 生成失敗（ブロック or 壁あり）: {nextPos}");
             }
 
             yield return new WaitForSeconds(delay);
