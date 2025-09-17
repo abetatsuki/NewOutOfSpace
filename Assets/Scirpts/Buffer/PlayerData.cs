@@ -11,6 +11,7 @@ public static class PlayerData
     {
         LevelCount++;
         PlayerHp = Mathf.Max(PlayerHp - 1, 0);
+       
         if (LevelCount >= 10)
         {
             LevelUp();
