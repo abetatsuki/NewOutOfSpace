@@ -30,4 +30,26 @@ public class RayCastController : MonoBehaviour
     
         return null;
     }
+    public GameObject GetDoorUnderMouse()
+    {
+        Camera cam = _camSwitcher.CurrentCamera;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance))
+        {
+            if (hit.collider.CompareTag("Door"))
+            {
+                float distanceToPlayer = Vector3.Distance(_player.position, hit.collider.transform.position);
+
+                if (distanceToPlayer <= _pickupRange)
+                {
+                    return hit.collider.gameObject;
+                }
+            }
+        }
+
+        return null;
+    }
+
+
 }
