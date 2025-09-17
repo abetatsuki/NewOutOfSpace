@@ -27,13 +27,26 @@ public class PlayerMoveHandler : MonoBehaviour
     private void MovePlayer()
     {
         Vector2 input = _statusBuffer.MoveInput;
-        Vector3 moveDir = new Vector3(input.x, 0, input.y);
+
+        // プレイヤーが向いている方向を基準にする
+        Vector3 forward = transform.forward;
+        Vector3 right = transform.right;
+
+        // Y軸方向の成分を消して「地面方向」だけ残す
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        // 入力を forward/right に変換
+        Vector3 moveDir = (forward * input.y + right * input.x).normalized;
 
         float speed = GetSpeedByStatus();
 
         Vector3 velocity = moveDir * speed;
         _rb.linearVelocity = new Vector3(velocity.x, _rb.linearVelocity.y, velocity.z);
     }
+
     private float GetSpeedByStatus()
     {
         switch (_statusBuffer.CurrentMoveStatus)
